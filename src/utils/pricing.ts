@@ -19,14 +19,14 @@ export const ACCOMMODATION_COSTS = {
 export const EARLY_BIRD_DISCOUNT = 20;
 export const FAMILY_DISCOUNT_PERCENTAGE = 0.05;
 export const EARLY_BIRD_DEADLINE = new Date('2026-07-26T23:59:59+08:00');
+export const EVENT_DATE = new Date('2026-08-29T00:00:00+08:00');
 
-export const calculateAge = (dateOfBirth: string): number => {
-  const today = new Date();
+export const calculateAge = (dateOfBirth: string, referenceDate: Date = EVENT_DATE): number => {
   const birthDate = new Date(dateOfBirth);
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
+  let age = referenceDate.getFullYear() - birthDate.getFullYear();
+  const monthDiff = referenceDate.getMonth() - birthDate.getMonth();
   
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+  if (monthDiff < 0 || (monthDiff === 0 && referenceDate.getDate() < birthDate.getDate())) {
     age--;
   }
   
@@ -34,7 +34,10 @@ export const calculateAge = (dateOfBirth: string): number => {
 };
 
 export const getOccupationPrice = (occupationType: string): number => {
-  switch (occupationType) {
+  // Remove the price suffix if present
+  const baseType = occupationType.split(' - RM ')[0];
+  
+  switch (baseType) {
     case 'Working Adult':
       return PRICES.WORKING_ADULT;
     case 'Student':
@@ -56,22 +59,23 @@ export const getOccupationPrice = (occupationType: string): number => {
 
 export const getOccupationOptions = (age: number): string[] => {
   if (age <= 4) {
-    return ['Child (4 and Below)'];
+    return [`Child (4 and Below) - RM ${PRICES.CHILD_4_BELOW}`];
   } else if (age >= 5 && age <= 12) {
-    return ['Child (Ages 5-12)'];
+    return [`Child (Ages 5-12) - RM ${PRICES.CHILD_5_12}`];
   } else {
     return [
-      'Working Adult',
-      'Student',
-      'Homemaker',
-      'Ministry Worker - Salaried',
-      'Ministry Worker - Stipend'
+      `Working Adult - RM ${PRICES.WORKING_ADULT}`,
+      `Student - RM ${PRICES.STUDENT}`,
+      `Homemaker - RM ${PRICES.HOMEMAKER}`,
+      `Ministry Worker - Salaried - RM ${PRICES.MINISTRY_SALARY}`,
+      `Ministry Worker - Stipend - RM ${PRICES.MINISTRY_STIPEND}`
     ];
   }
 };
 
 export const isEligibleForEarlyBird = (occupationType: string): boolean => {
-  return occupationType !== 'Child (4 and Below)';
+  const baseType = occupationType.split(' - RM ')[0];
+  return baseType !== 'Child (4 and Below)';
 };
 
 export const calculatePricing = (
