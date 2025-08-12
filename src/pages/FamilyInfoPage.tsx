@@ -77,7 +77,7 @@ export const FamilyInfoPage: React.FC = () => {
     });
   };
 
-  const handleAccommodationChange = (choice: string) => {
+  const handleAccommodationChange = (choice: 'regular' | 'suite' | 'mattress') => {
     dispatch({
       type: 'UPDATE_FAMILY_INFO',
       payload: { accommodationChoice: choice }
@@ -155,13 +155,7 @@ export const FamilyInfoPage: React.FC = () => {
 
           {familyInfo.isRegisteringFamily && (
             <div className="space-y-6">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Family Members</h3>
-                <Button onClick={addFamilyMember} size="sm">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Member
-                </Button>
-              </div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Family Members</h3>
 
               {familyInfo.familyMembers.map((member, index) => {
                 const age = member.dateOfBirth ? calculateAge(member.dateOfBirth) : 0;
@@ -303,6 +297,11 @@ export const FamilyInfoPage: React.FC = () => {
                   </div>
                 );
               })}
+
+              <Button onClick={addFamilyMember} size="sm" className="w-full">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Member
+              </Button>
             </div>
           )}
         </div>
@@ -329,7 +328,7 @@ export const FamilyInfoPage: React.FC = () => {
                   name="accommodation"
                   value="regular"
                   checked={familyInfo.accommodationChoice === 'regular'}
-                  onChange={(e) => handleAccommodationChange(e.target.value)}
+                  onChange={(e) => handleAccommodationChange(e.target.value as 'regular' | 'suite' | 'mattress')}
                   className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300"
                 />
                 <label htmlFor="regular" className="ml-3 flex-1">
@@ -345,7 +344,7 @@ export const FamilyInfoPage: React.FC = () => {
                   name="accommodation"
                   value="suite"
                   checked={familyInfo.accommodationChoice === 'suite'}
-                  onChange={(e) => handleAccommodationChange(e.target.value)}
+                  onChange={(e) => handleAccommodationChange(e.target.value as 'regular' | 'suite' | 'mattress')}
                   className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300"
                 />
                 <label htmlFor="suite" className="ml-3 flex-1">
@@ -361,7 +360,7 @@ export const FamilyInfoPage: React.FC = () => {
                   name="accommodation"
                   value="mattress"
                   checked={familyInfo.accommodationChoice === 'mattress'}
-                  onChange={(e) => handleAccommodationChange(e.target.value)}
+                  onChange={(e) => handleAccommodationChange(e.target.value as 'regular' | 'suite' | 'mattress')}
                   className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300"
                 />
                 <label htmlFor="mattress" className="ml-3 flex-1">

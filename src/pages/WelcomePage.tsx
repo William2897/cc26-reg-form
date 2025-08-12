@@ -17,12 +17,15 @@ export const WelcomePage: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Church Camp 2026
+          <h1 className="text-4xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            DAHC Church Camp 2026
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Join us for an unforgettable spiritual journey
-          </p>
+            <h2 className="text-2xl md:text-5xl text-teal-600 dark:text-teal-400 font-semibold mb-4">
+            "Why, God?"
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+            Join us as we explore life's deepest questions and discover God's purposes together
+            </p>
           
           <div className="max-w-md mx-auto mb-8">
             <CountdownTimer />

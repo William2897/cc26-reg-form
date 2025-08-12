@@ -22,9 +22,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, showProgress = true })
             {/* Header Bar */}
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-lg"></div>
+                {/* <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-lg"></div> */}
                 <span className="text-xl font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
-                  CC'26 Registration
+                  CC '26 Registration
                 </span>
               </div>
               
